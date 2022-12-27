@@ -470,7 +470,8 @@ static const NSInteger kErrorMethodNotAvailableOnIOSVersion = 1005;
 
 - (void)refreshVideoOrientation {
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    self.capturePreviewLayer.frame = self.previewView.bounds;
+     CGRect screenRect = [[UIScreen mainScreen] bounds];
+     self.capturePreviewLayer.frame = screenRect;
     if ([self.capturePreviewLayer.connection isVideoOrientationSupported]) {
         self.capturePreviewLayer.connection.videoOrientation = [self captureOrientationForInterfaceOrientation:orientation];
     }
@@ -554,7 +555,8 @@ static const NSInteger kErrorMethodNotAvailableOnIOSVersion = 1005;
     
     self.capturePreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:newSession];
     self.capturePreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    self.capturePreviewLayer.frame = self.previewView.bounds;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    self.capturePreviewLayer.frame = screenRect;
     
     [newSession commitConfiguration];
     
